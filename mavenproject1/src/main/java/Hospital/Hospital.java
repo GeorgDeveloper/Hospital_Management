@@ -5,15 +5,24 @@
  */
 package Hospital;
 
+import Login.Login;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
+import java.awt.print.PrinterException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author Егор
  */
 public class Hospital extends javax.swing.JFrame {
-private JFrame frame;
+
+    private JFrame frame;
+    Login iLogin;
+
     /**
      * Creates new form Hospital
      */
@@ -36,25 +45,25 @@ private JFrame frame;
         jLabel2 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        jtxtPrescription = new javax.swing.JTextArea();
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jbtnExit = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
-        jButton8 = new javax.swing.JButton();
-        jButton9 = new javax.swing.JButton();
-        jButton10 = new javax.swing.JButton();
+        jbtnUpdate = new javax.swing.JButton();
+        jbtnDelete = new javax.swing.JButton();
+        jbtnDoctor = new javax.swing.JButton();
+        jbtnGPAppointment = new javax.swing.JButton();
+        jbtnPatient = new javax.swing.JButton();
+        jbtnRevers = new javax.swing.JButton();
+        jbtnLogin = new javax.swing.JButton();
+        jbtnPharmacyOffce = new javax.swing.JButton();
+        jbtnPrint = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        jcmbNameTablets = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
+        jlbRef = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
@@ -71,25 +80,25 @@ private JFrame frame;
         jLabel19 = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
-        jTextField7 = new javax.swing.JTextField();
-        jTextField8 = new javax.swing.JTextField();
-        jTextField9 = new javax.swing.JTextField();
-        jTextField10 = new javax.swing.JTextField();
-        jTextField11 = new javax.swing.JTextField();
-        jTextField12 = new javax.swing.JTextField();
-        jTextField13 = new javax.swing.JTextField();
-        jTextField14 = new javax.swing.JTextField();
-        jTextField15 = new javax.swing.JTextField();
-        jTextField16 = new javax.swing.JTextField();
-        jTextField17 = new javax.swing.JTextField();
-        jTextField18 = new javax.swing.JTextField();
-        jTextField20 = new javax.swing.JTextField();
+        jtxtDose = new javax.swing.JTextField();
+        jtxtRef = new javax.swing.JTextField();
+        jtxtNumberTablets = new javax.swing.JTextField();
+        jtxtLot = new javax.swing.JTextField();
+        jtxtDailyDose = new javax.swing.JTextField();
+        jtxtExpDate = new javax.swing.JTextField();
+        jtxtIssuedDate = new javax.swing.JTextField();
+        jtxtPossibleSideEffects = new javax.swing.JTextField();
+        jtxtFurtherInformation = new javax.swing.JTextField();
+        jtxtAdress = new javax.swing.JTextField();
+        jtxtStorageAdvice = new javax.swing.JTextField();
+        jtxtDrivingUsingMachines = new javax.swing.JTextField();
+        jtxtHowtoUseMedication = new javax.swing.JTextField();
+        jtxtPatiientID = new javax.swing.JTextField();
+        jtxtDoctorNHSNo = new javax.swing.JTextField();
+        jtxtPatiientName = new javax.swing.JTextField();
+        jtxtDateBist = new javax.swing.JTextField();
         jScrollPane4 = new javax.swing.JScrollPane();
-        jTable3 = new javax.swing.JTable();
+        jTableTT = new javax.swing.JTable();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -123,13 +132,13 @@ private JFrame frame;
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        jtxtPrescription.setColumns(20);
+        jtxtPrescription.setRows(5);
+        jScrollPane1.setViewportView(jtxtPrescription);
 
-        jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 260, 480));
+        jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 330, 480));
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 100, 280, 490));
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 100, 350, 490));
 
         jPanel3.setBackground(new java.awt.Color(0, 0, 0));
         jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
@@ -156,51 +165,86 @@ private JFrame frame;
         });
         jPanel4.add(jbtnExit, new org.netbeans.lib.awtextra.AbsoluteConstraints(1220, 20, 110, -1));
 
-        jButton2.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jButton2.setText("Обновить");
-        jPanel4.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 140, -1));
-
-        jButton3.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jButton3.setText("Удалить");
-        jPanel4.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 20, 140, -1));
-
-        jButton4.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jButton4.setText("Врач");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        jbtnUpdate.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jbtnUpdate.setText("Обновить");
+        jbtnUpdate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                jbtnUpdateActionPerformed(evt);
             }
         });
-        jPanel4.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 20, 140, -1));
+        jPanel4.add(jbtnUpdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 140, -1));
 
-        jButton5.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jButton5.setText("Поликлиника");
-        jPanel4.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 20, 150, -1));
-
-        jButton6.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jButton6.setText("Пациент");
-        jPanel4.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 20, 140, -1));
-
-        jButton7.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jButton7.setText("Сброс");
-        jPanel4.add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 20, 120, -1));
-
-        jButton8.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jButton8.setText("Рецепт");
-        jPanel4.add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 20, 120, -1));
-
-        jButton9.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jButton9.setText("Авторизация");
-        jPanel4.add(jButton9, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 20, 150, -1));
-
-        jButton10.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jButton10.setText("Печать");
-        jButton10.addActionListener(new java.awt.event.ActionListener() {
+        jbtnDelete.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jbtnDelete.setText("Удалить");
+        jbtnDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton10ActionPerformed(evt);
+                jbtnDeleteActionPerformed(evt);
             }
         });
-        jPanel4.add(jButton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(1120, 20, 100, -1));
+        jPanel4.add(jbtnDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 20, 140, -1));
+
+        jbtnDoctor.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jbtnDoctor.setText("Врач");
+        jbtnDoctor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnDoctorActionPerformed(evt);
+            }
+        });
+        jPanel4.add(jbtnDoctor, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 20, 140, -1));
+
+        jbtnGPAppointment.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jbtnGPAppointment.setText("Поликлиника");
+        jbtnGPAppointment.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnGPAppointmentActionPerformed(evt);
+            }
+        });
+        jPanel4.add(jbtnGPAppointment, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 20, 150, -1));
+
+        jbtnPatient.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jbtnPatient.setText("Пациент");
+        jbtnPatient.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnPatientActionPerformed(evt);
+            }
+        });
+        jPanel4.add(jbtnPatient, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 20, 140, -1));
+
+        jbtnRevers.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jbtnRevers.setText("Сброс");
+        jbtnRevers.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnReversActionPerformed(evt);
+            }
+        });
+        jPanel4.add(jbtnRevers, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 20, 120, -1));
+
+        jbtnLogin.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jbtnLogin.setText("Авторизация");
+        jbtnLogin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnLoginActionPerformed(evt);
+            }
+        });
+        jPanel4.add(jbtnLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 20, 150, -1));
+
+        jbtnPharmacyOffce.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jbtnPharmacyOffce.setText("Рецепт");
+        jbtnPharmacyOffce.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnPharmacyOffceActionPerformed(evt);
+            }
+        });
+        jPanel4.add(jbtnPharmacyOffce, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 20, 120, -1));
+
+        jbtnPrint.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jbtnPrint.setText("Печать");
+        jbtnPrint.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnPrintActionPerformed(evt);
+            }
+        });
+        jPanel4.add(jbtnPrint, new org.netbeans.lib.awtextra.AbsoluteConstraints(1120, 20, 100, -1));
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -219,17 +263,22 @@ private JFrame frame;
 
         getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 590, 1340, 70));
 
-        jComboBox1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Сделайте выбор", "Аспирин", "Парцетомол", "АЦЦ" }));
-        getContentPane().add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 190, -1, 40));
+        jcmbNameTablets.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jcmbNameTablets.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Сделайте выбор", "Аспирин", "Парцетомол", "АЦЦ" }));
+        jcmbNameTablets.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcmbNameTabletsActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jcmbNameTablets, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 190, -1, 40));
 
         jLabel4.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel4.setText("Название таблеток");
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 200, -1, -1));
 
-        jLabel5.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabel5.setText("Справка №");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 240, -1, -1));
+        jlbRef.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jlbRef.setText("Рег. №");
+        getContentPane().add(jlbRef, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 240, -1, -1));
 
         jLabel6.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel6.setText("Дозировка (мг)");
@@ -295,153 +344,349 @@ private JFrame frame;
         jLabel21.setText("Дата рождения");
         getContentPane().add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 480, -1, -1));
 
-        jTextField1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 280, 180, -1));
+        jtxtDose.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        getContentPane().add(jtxtDose, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 280, 180, -1));
 
-        jTextField3.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        getContentPane().add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 240, 180, -1));
+        jtxtRef.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        getContentPane().add(jtxtRef, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 240, 180, -1));
 
-        jTextField4.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jTextField4.addActionListener(new java.awt.event.ActionListener() {
+        jtxtNumberTablets.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jtxtNumberTablets.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField4ActionPerformed(evt);
+                jtxtNumberTabletsActionPerformed(evt);
             }
         });
-        getContentPane().add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 320, 180, -1));
+        getContentPane().add(jtxtNumberTablets, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 320, 180, -1));
 
-        jTextField5.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        getContentPane().add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 360, 180, -1));
+        jtxtLot.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        getContentPane().add(jtxtLot, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 360, 180, -1));
 
-        jTextField7.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jTextField7.addActionListener(new java.awt.event.ActionListener() {
+        jtxtDailyDose.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jtxtDailyDose.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField7ActionPerformed(evt);
+                jtxtDailyDoseActionPerformed(evt);
             }
         });
-        getContentPane().add(jTextField7, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 480, 180, -1));
+        getContentPane().add(jtxtDailyDose, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 480, 180, -1));
 
-        jTextField8.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        getContentPane().add(jTextField8, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 440, 180, -1));
+        jtxtExpDate.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        getContentPane().add(jtxtExpDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 440, 180, -1));
 
-        jTextField9.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jTextField9.addActionListener(new java.awt.event.ActionListener() {
+        jtxtIssuedDate.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jtxtIssuedDate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField9ActionPerformed(evt);
+                jtxtIssuedDateActionPerformed(evt);
             }
         });
-        getContentPane().add(jTextField9, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 400, 180, -1));
+        getContentPane().add(jtxtIssuedDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 400, 180, -1));
 
-        jTextField10.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        getContentPane().add(jTextField10, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 520, 180, -1));
+        jtxtPossibleSideEffects.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        getContentPane().add(jtxtPossibleSideEffects, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 520, 180, -1));
 
-        jTextField11.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jTextField11.addActionListener(new java.awt.event.ActionListener() {
+        jtxtFurtherInformation.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jtxtFurtherInformation.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField11ActionPerformed(evt);
+                jtxtFurtherInformationActionPerformed(evt);
             }
         });
-        getContentPane().add(jTextField11, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 200, 180, -1));
+        getContentPane().add(jtxtFurtherInformation, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 200, 180, -1));
 
-        jTextField12.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        getContentPane().add(jTextField12, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 520, 180, -1));
+        jtxtAdress.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        getContentPane().add(jtxtAdress, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 520, 180, -1));
 
-        jTextField13.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jTextField13.addActionListener(new java.awt.event.ActionListener() {
+        jtxtStorageAdvice.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jtxtStorageAdvice.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField13ActionPerformed(evt);
+                jtxtStorageAdviceActionPerformed(evt);
             }
         });
-        getContentPane().add(jTextField13, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 240, 180, -1));
+        getContentPane().add(jtxtStorageAdvice, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 240, 180, -1));
 
-        jTextField14.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        getContentPane().add(jTextField14, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 280, 180, -1));
+        jtxtDrivingUsingMachines.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        getContentPane().add(jtxtDrivingUsingMachines, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 280, 180, -1));
 
-        jTextField15.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jTextField15.addActionListener(new java.awt.event.ActionListener() {
+        jtxtHowtoUseMedication.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jtxtHowtoUseMedication.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField15ActionPerformed(evt);
+                jtxtHowtoUseMedicationActionPerformed(evt);
             }
         });
-        getContentPane().add(jTextField15, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 320, 180, -1));
+        getContentPane().add(jtxtHowtoUseMedication, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 320, 180, -1));
 
-        jTextField16.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        getContentPane().add(jTextField16, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 360, 180, -1));
+        jtxtPatiientID.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        getContentPane().add(jtxtPatiientID, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 360, 180, -1));
 
-        jTextField17.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jTextField17.addActionListener(new java.awt.event.ActionListener() {
+        jtxtDoctorNHSNo.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jtxtDoctorNHSNo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField17ActionPerformed(evt);
+                jtxtDoctorNHSNoActionPerformed(evt);
             }
         });
-        getContentPane().add(jTextField17, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 400, 180, -1));
+        getContentPane().add(jtxtDoctorNHSNo, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 400, 180, -1));
 
-        jTextField18.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        getContentPane().add(jTextField18, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 440, 180, -1));
+        jtxtPatiientName.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        getContentPane().add(jtxtPatiientName, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 440, 180, -1));
 
-        jTextField20.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        getContentPane().add(jTextField20, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 480, 180, -1));
+        jtxtDateBist.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        getContentPane().add(jtxtDateBist, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 480, 180, -1));
 
-        jTable3.setModel(new javax.swing.table.DefaultTableModel(
+        jTableTT.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null}
+
             },
             new String [] {
                 "Название таблеток", "Справка №", "Дозировка (мг)", "Кол-во таблеток", "Масса", "Дата выпуска", "Срок годности", "Суточная доза", "Побочные эффекты", "Доп. информация", "Рек. по хранению", "Рек. для водителей", "Инструкция по приему", "Пациент ID", "Страховой полис №", "Имя пациента", "Дата рождения", "Адрес пациента"
             }
         ));
-        jScrollPane4.setViewportView(jTable3);
+        jScrollPane4.setViewportView(jTableTT);
 
-        getContentPane().add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 680, 1340, 90));
+        getContentPane().add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 690, 1340, 90));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
+    private void jtxtNumberTabletsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtxtNumberTabletsActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField4ActionPerformed
+    }//GEN-LAST:event_jtxtNumberTabletsActionPerformed
 
-    private void jTextField7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField7ActionPerformed
+    private void jtxtDailyDoseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtxtDailyDoseActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField7ActionPerformed
+    }//GEN-LAST:event_jtxtDailyDoseActionPerformed
 
-    private void jTextField9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField9ActionPerformed
+    private void jtxtIssuedDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtxtIssuedDateActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField9ActionPerformed
+    }//GEN-LAST:event_jtxtIssuedDateActionPerformed
 
-    private void jTextField11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField11ActionPerformed
+    private void jtxtFurtherInformationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtxtFurtherInformationActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField11ActionPerformed
+    }//GEN-LAST:event_jtxtFurtherInformationActionPerformed
 
-    private void jTextField13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField13ActionPerformed
+    private void jtxtStorageAdviceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtxtStorageAdviceActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField13ActionPerformed
+    }//GEN-LAST:event_jtxtStorageAdviceActionPerformed
 
-    private void jTextField15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField15ActionPerformed
+    private void jtxtHowtoUseMedicationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtxtHowtoUseMedicationActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField15ActionPerformed
+    }//GEN-LAST:event_jtxtHowtoUseMedicationActionPerformed
 
-    private void jTextField17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField17ActionPerformed
+    private void jtxtDoctorNHSNoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtxtDoctorNHSNoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField17ActionPerformed
+    }//GEN-LAST:event_jtxtDoctorNHSNoActionPerformed
 
-    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton10ActionPerformed
+    private void jbtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnPrintActionPerformed
+        try {
+            jtxtPrescription.print();
+        } catch (PrinterException ex) {
+            Logger.getLogger(Hospital.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jbtnPrintActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
+    private void jbtnDoctorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnDoctorActionPerformed
+        this.setVisible(false);
+        iLogin = new Login();
+        iLogin.setVisible(true);
+    }//GEN-LAST:event_jbtnDoctorActionPerformed
 
     private void jbtnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnExitActionPerformed
         frame = new JFrame();
-        if(JOptionPane.showConfirmDialog(frame, "Хотите выйти?", "Регистратура", 
-                JOptionPane.YES_NO_OPTION) == JOptionPane.YES_NO_OPTION){
+        if (JOptionPane.showConfirmDialog(frame, "Хотите выйти?", "Регистратура",
+                JOptionPane.YES_NO_OPTION) == JOptionPane.YES_NO_OPTION) {
             System.exit(0);
         }
     }//GEN-LAST:event_jbtnExitActionPerformed
+
+    private void jcmbNameTabletsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcmbNameTabletsActionPerformed
+        if (jcmbNameTablets.getSelectedItem().equals("Аспирин")) {
+            jtxtRef.setText("Асп343538");
+            jtxtDose.setText("2");
+            jtxtNumberTablets.setText("32");
+            jtxtLot.setText("414324242");
+            jtxtIssuedDate.setText("06/02/2023");
+            jtxtExpDate.setText("04/02/2024");
+            jtxtDailyDose.setText("4");
+
+            jtxtPossibleSideEffects.setText("Кровотечение");
+            jtxtFurtherInformation.setText("При комнатной температуре");
+            jtxtStorageAdvice.setText("Менее 20%");
+            jtxtDrivingUsingMachines.setText("Не рекомендируется");
+            jtxtHowtoUseMedication.setText("Алкоголь запрещен");
+            jtxtPatiientID.setText("P1214423");
+            jtxtDoctorNHSNo.setText("3124-244-234");
+        } else if (jcmbNameTablets.getSelectedItem().equals("Парцетомол")) {
+            jtxtRef.setText("Пар343538");
+            jtxtDose.setText("1");
+            jtxtNumberTablets.setText("23");
+            jtxtLot.setText("6788875");
+            jtxtIssuedDate.setText("06/03/2023");
+            jtxtExpDate.setText("04/03/2024");
+            jtxtDailyDose.setText("3");
+
+            jtxtPossibleSideEffects.setText("Головокружение");
+            jtxtFurtherInformation.setText("При температуре на выше +5");
+            jtxtStorageAdvice.setText("Менее 30%");
+            jtxtDrivingUsingMachines.setText("Не рекомендируется");
+            jtxtHowtoUseMedication.setText("Алкоголь запрещен");
+            jtxtPatiientID.setText("Y1214423");
+            jtxtDoctorNHSNo.setText("3124-244-567");
+        } else if (jcmbNameTablets.getSelectedItem().equals("АЦЦ")) {
+            jtxtRef.setText("АЦЦ3400038");
+            jtxtDose.setText("4");
+            jtxtNumberTablets.setText("45");
+            jtxtLot.setText("5765674");
+            jtxtIssuedDate.setText("05/03/2023");
+            jtxtExpDate.setText("05/04/2024");
+            jtxtDailyDose.setText("8");
+
+            jtxtPossibleSideEffects.setText("Отсутствуют");
+            jtxtFurtherInformation.setText("Отсутствуют");
+            jtxtStorageAdvice.setText("Менее 20%");
+            jtxtDrivingUsingMachines.setText("Не рекомендируется");
+            jtxtHowtoUseMedication.setText("Алкоголь не рекомендуются");
+            jtxtPatiientID.setText("Ф1214423");
+            jtxtDoctorNHSNo.setText("3124-345-567");
+        } else if (jcmbNameTablets.getSelectedItem().equals("Сделайте выбор")) {
+            jtxtRef.setText("");
+            jtxtDose.setText("");
+            jtxtNumberTablets.setText("");
+            jtxtLot.setText("");
+            jtxtIssuedDate.setText("");
+            jtxtExpDate.setText("");
+            jtxtDailyDose.setText("");
+
+            jtxtPossibleSideEffects.setText("");
+            jtxtFurtherInformation.setText("");
+            jtxtStorageAdvice.setText("");
+            jtxtDrivingUsingMachines.setText("");
+            jtxtHowtoUseMedication.setText("");
+            jtxtPatiientID.setText("");
+            jtxtDoctorNHSNo.setText("");
+        }
+    }//GEN-LAST:event_jcmbNameTabletsActionPerformed
+
+    private void jbtnPharmacyOffceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnPharmacyOffceActionPerformed
+        String Qty1 = (jtxtRef.getText());
+        String Qty2 = (jtxtDose.getText());
+        String Qty3 = (jtxtNumberTablets.getText());
+        String Qty4 = (jtxtLot.getText());
+        String Qty5 = (jtxtDailyDose.getText());
+        String Qty6 = (jtxtPossibleSideEffects.getText());
+        String Qty7 = (jtxtFurtherInformation.getText());
+        String Qty8 = (jtxtHowtoUseMedication.getText());
+        String Qty9 = (jtxtPatiientID.getText());
+        String Qty10 = (jtxtPatiientName.getText());
+        String Qty11 = (jtxtDateBist.getText());
+        String Qty12 = (jtxtAdress.getText());
+        String Qty13 = "";
+
+        if (jcmbNameTablets.getSelectedItem().equals("Аспирин")) {
+            Qty13 = "Аспирин";
+        } else if (jcmbNameTablets.getSelectedItem().equals("Парцетомол")) {
+            Qty13 = "Парцетомол";
+        }
+        if (jcmbNameTablets.getSelectedItem().equals("АЦЦ")) {
+            Qty13 = "АЦЦ";
+        }
+
+        jtxtPrescription.setText("");
+        jtxtPrescription.append("\t\n\tРегистратура"
+                + "\t\n\tРецепт пациента\n"
+                + "\nИмя пациента:\t" + Qty10
+                + "\nДата рождения:\t" + Qty11
+                + "\nАдресс пациента:\t" + Qty12
+                + "\nРецепт:\t\t" + Qty13
+                + "\nРег. №:\t\t" + Qty1
+                + "\nДозировка (мг):\t" + Qty2
+                + "\nКоличество таблеток:\t" + Qty3
+                + "\nВес:\t\t" + Qty4
+                + "\nСуточная доза:\t" + Qty5
+                + "\nПобочные эффекты:\t" + Qty6
+                + "\nДоп. информация:\t" + Qty7
+                + "\nИнструкция по прм.:\t" + Qty8
+                + "\nПациент ID:\t\t" + Qty9
+        );
+    }//GEN-LAST:event_jbtnPharmacyOffceActionPerformed
+
+    private void jbtnReversActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnReversActionPerformed
+        jtxtRef.setText("");
+        jtxtDose.setText("");
+        jtxtNumberTablets.setText("");
+        jtxtLot.setText("");
+        jtxtIssuedDate.setText("");
+        jtxtExpDate.setText("");
+        jtxtDailyDose.setText("");
+
+        jtxtPossibleSideEffects.setText("");
+        jtxtFurtherInformation.setText("");
+        jtxtStorageAdvice.setText("");
+        jtxtDrivingUsingMachines.setText("");
+        jtxtHowtoUseMedication.setText("");
+        jtxtPatiientID.setText("");
+        jtxtDoctorNHSNo.setText("");
+        jcmbNameTablets.getModel().setSelectedItem("Сделайте выбор");
+
+        jtxtPatiientName.setText("");
+        jtxtDateBist.setText("");
+        jtxtAdress.setText("");
+    }//GEN-LAST:event_jbtnReversActionPerformed
+
+    private void jbtnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnLoginActionPerformed
+        this.setVisible(false);
+        iLogin = new Login();
+        iLogin.setVisible(true);
+
+
+    }//GEN-LAST:event_jbtnLoginActionPerformed
+
+    private void jbtnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnUpdateActionPerformed
+
+        DefaultTableModel model = (DefaultTableModel) jTableTT.getModel();
+        model.addRow(new Object[]{jcmbNameTablets.getSelectedItem().toString(),
+            jtxtRef.getText(),
+            jtxtDose.getText(),
+            jtxtNumberTablets.getText(),
+            jtxtLot.getText(),
+            jtxtIssuedDate.getText(),
+            jtxtExpDate.getText(),
+            jtxtDailyDose.getText(),
+            jtxtPossibleSideEffects.getText(),
+            jtxtFurtherInformation.getText(),
+            jtxtStorageAdvice.getText(),
+            jtxtDateBist.getText(),
+            jtxtDrivingUsingMachines.getText(),
+            jtxtHowtoUseMedication.getText(),
+            jtxtPatiientID.getText(),
+            jtxtDoctorNHSNo.getText(),
+            jtxtPatiientName.getText(),
+            jtxtDateBist.getText(),
+            jtxtAdress.getText(),});
+    }//GEN-LAST:event_jbtnUpdateActionPerformed
+
+    private void jbtnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnDeleteActionPerformed
+        DefaultTableModel model = (DefaultTableModel) jTableTT.getModel();
+        if (jTableTT.getSelectedRow() == -1) {
+            if (jTableTT.getRowCount() == 0) {
+                JOptionPane.showMessageDialog(null, "Нет данных для удаления!",
+                        "Регистратура", JOptionPane.OK_OPTION);
+            } else {
+                JOptionPane.showMessageDialog(null, "Выберите строку для удаления!",
+                        "Регистратура", JOptionPane.OK_OPTION);
+            }
+        } else {
+            model.removeRow(jTableTT.getSelectedRow());
+        }
+    }//GEN-LAST:event_jbtnDeleteActionPerformed
+
+    private void jbtnGPAppointmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnGPAppointmentActionPerformed
+        this.setVisible(false);
+        iLogin = new Login();
+        iLogin.setVisible(true);
+    }//GEN-LAST:event_jbtnGPAppointmentActionPerformed
+
+    private void jbtnPatientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnPatientActionPerformed
+        this.setVisible(false);
+        iLogin = new Login();
+        iLogin.setVisible(true);
+    }//GEN-LAST:event_jbtnPatientActionPerformed
 
     /**
      * @param args the command line arguments
@@ -479,16 +724,6 @@ private JFrame frame;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton10;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton8;
-    private javax.swing.JButton jButton9;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -504,7 +739,6 @@ private JFrame frame;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
@@ -519,25 +753,36 @@ private JFrame frame;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
-    private javax.swing.JTable jTable3;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField10;
-    private javax.swing.JTextField jTextField11;
-    private javax.swing.JTextField jTextField12;
-    private javax.swing.JTextField jTextField13;
-    private javax.swing.JTextField jTextField14;
-    private javax.swing.JTextField jTextField15;
-    private javax.swing.JTextField jTextField16;
-    private javax.swing.JTextField jTextField17;
-    private javax.swing.JTextField jTextField18;
-    private javax.swing.JTextField jTextField20;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
-    private javax.swing.JTextField jTextField9;
+    private javax.swing.JTable jTableTT;
+    private javax.swing.JButton jbtnDelete;
+    private javax.swing.JButton jbtnDoctor;
     private javax.swing.JButton jbtnExit;
+    private javax.swing.JButton jbtnGPAppointment;
+    private javax.swing.JButton jbtnLogin;
+    private javax.swing.JButton jbtnPatient;
+    private javax.swing.JButton jbtnPharmacyOffce;
+    private javax.swing.JButton jbtnPrint;
+    private javax.swing.JButton jbtnRevers;
+    private javax.swing.JButton jbtnUpdate;
+    private javax.swing.JComboBox<String> jcmbNameTablets;
+    private javax.swing.JLabel jlbRef;
+    private javax.swing.JTextField jtxtAdress;
+    private javax.swing.JTextField jtxtDailyDose;
+    private javax.swing.JTextField jtxtDateBist;
+    private javax.swing.JTextField jtxtDoctorNHSNo;
+    private javax.swing.JTextField jtxtDose;
+    private javax.swing.JTextField jtxtDrivingUsingMachines;
+    private javax.swing.JTextField jtxtExpDate;
+    private javax.swing.JTextField jtxtFurtherInformation;
+    private javax.swing.JTextField jtxtHowtoUseMedication;
+    private javax.swing.JTextField jtxtIssuedDate;
+    private javax.swing.JTextField jtxtLot;
+    private javax.swing.JTextField jtxtNumberTablets;
+    private javax.swing.JTextField jtxtPatiientID;
+    private javax.swing.JTextField jtxtPatiientName;
+    private javax.swing.JTextField jtxtPossibleSideEffects;
+    private javax.swing.JTextArea jtxtPrescription;
+    private javax.swing.JTextField jtxtRef;
+    private javax.swing.JTextField jtxtStorageAdvice;
     // End of variables declaration//GEN-END:variables
 }
